@@ -1,3 +1,17 @@
+const path = require('path');
+
+const presets = [
+	[
+		'@babel/preset-env',
+		{
+			'targets': {
+				'node': 'current'
+			}
+		}
+	],
+	'@babel/preset-react'
+];
+
 const plugins = [
 	[
 		'babel-plugin-inline-import',
@@ -7,4 +21,4 @@ const plugins = [
 	]
 ];
 
-module.exports = { plugins };
+module.exports = { presets, plugins };

@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
 	entry: {
-		vendor: [ '@babel/polyfill' ],
+		vendor: [ '@babel/polyfill', 'react' ],
 		app: [ path.join(__dirname, '/src/index.js') ]
 	},
 	output: {
@@ -12,17 +12,18 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				loader: 'babel-loader',
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
-				options: {
-					presets: [ '@babel/preset-env' ]
-				}
-			},
-			{
-				loader: 'raw-loader',
-				test: /\.md$/i
+				use: [
+					'babel-inline-import-loader',
+					{
+						loader: 'babel-loader',
+						options: {
+							presets: [ '@babel/preset-env', '@babel/preset-react' ]
+						}
+					}
+				]
 			}
 		]
-	}
+	},
 };
